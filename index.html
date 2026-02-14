@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Para Dayana ❤️</title>
+
+<style>
+body{
+margin:0;
+overflow:hidden;
+font-family: Georgia, serif;
+background:black;
+color:white;
+}
+
+/* INTRO */
+#intro{
+position:fixed;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
+cursor:pointer;
+z-index:10;
+transition:opacity 1.5s ease;
+}
+
+/* CARTA */
+#carta{
+opacity:0;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0.8);
+background:rgba(0,0,0,0.85);
+padding:40px;
+border-radius:15px;
+text-align:center;
+transition:all 2s ease;
+}
+
+#carta.mostrar{
+opacity:1;
+transform:translate(-50%,-50%) scale(1);
+}
+
+.corazon{
+font-size:22px;
+color:red;
+animation:latido 1.2s infinite;
+}
+
+@keyframes latido{
+0%{transform:scale(1);}
+50%{transform:scale(1.2);}
+100%{transform:scale(1);}
+}
+
+/* FOTO */
+#fotoContainer{
+position:absolute;
+width:100%;
+height:100%;
+display:none;
+overflow:hidden;
+transition:opacity 2s ease;
+}
+
+#fotoContainer img{
+width:110%;
+height:85%;
+object-fit:cover;
+animation:zoomLento 20s infinite alternate ease-in-out;
+}
+
+@keyframes zoomLento{
+from{transform:scale(1);}
+to{transform:scale(1.1);}
+}
+
+/* Parte inferior elegante */
+#pregunta{
+position:absolute;
+bottom:0;
+width:100%;
+height:15%;
+background:rgba(0,0,0,0.9);
+text-align:center;
+padding-top:10px;
+font-size:18px;
+}
+
+#pregunta h2{
+margin:5px;
+}
+
+/* Botones */
+button{
+padding:8px 20px;
+margin:5px;
+font-size:16px;
+border:none;
+border-radius:20px;
+cursor:pointer;
+transition:all 0.3s ease;
+}
+
+#si{
+background:#ff004c;
+color:white;
+}
+
+#si:hover{
+transform:scale(1.1);
+}
+
+#no{
+background:gray;
+color:white;
+position:relative;
+}
+
+/* MENSAJE FINAL */
+#mensaje{
+display:none;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+font-size:28px;
+text-align:center;
+animation:fadeIn 2s ease forwards;
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+/* FUEGOS */
+.firework{
+position:absolute;
+width:6px;
+height:6px;
+border-radius:50%;
+animation:explode 1.2s ease-out forwards;
+}
+
+@keyframes explode{
+0%{transform:scale(1);}
+100%{transform:scale(25); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro" onclick="iniciar()">
+✨ Toca la pantalla ✨
+</div>
+
+<div id="carta">
+<div class="corazon">❤️ ❤️ ❤️</div>
+<h2>Dayana…</h2>
+</div>
+
+<div id="fotoContainer">
+<img src="foto.jpg">
+<div id="pregunta">
+<h2>Dayana ❤️</h2>
+¿Quieres ser mi San Valentine’s Day?
+<br>
+<button id="si" onclick="aceptar()">Sí ❤️</button>
+<button id="no" onmouseover="moverNo()">No 😢</button>
+</div>
+</div>
+
+<div id="mensaje"></div>
+
+<script>
+
+function iniciar(){
+document.getElementById("intro").style.opacity="0";
+
+setTimeout(()=>{
+document.getElementById("intro").style.display="none";
+let carta=document.getElementById("carta");
+carta.classList.add("mostrar");
+},1500);
+
+setTimeout(()=>{
+document.getElementById("carta").style.opacity="0";
+},5000);
+
+setTimeout(()=>{
+document.getElementById("carta").style.display="none";
+document.getElementById("fotoContainer").style.display="block";
+},6500);
+}
+
+function moverNo(){
+let boton=document.getElementById("no");
+boton.style.position="absolute";
+boton.style.left=Math.random()*70+"%";
+boton.style.top=Math.random()*50+"%";
+}
+
+function aceptar(){
+document.getElementById("fotoContainer").style.display="none";
+
+let mensaje=document.getElementById("mensaje");
+mensaje.style.display="block";
+mensaje.innerHTML="Eres la mujer más increíble que ha llegado a mi vida ❤️";
+
+lanzarFuegosContinuos();
+
+setTimeout(()=>{
+mensaje.innerHTML="Te amo mi amor ❤️";
+},4000);
+}
+
+function lanzarFuegosContinuos(){
+let intervalo=setInterval(()=>{
+for(let i=0;i<10;i++){
+let fw=document.createElement("div");
+fw.className="firework";
+fw.style.left=Math.random()*100+"%";
+fw.style.top=Math.random()*100+"%";
+fw.style.background="hsl("+Math.random()*360+",100%,50%)";
+document.body.appendChild(fw);
+setTimeout(()=>fw.remove(),1200);
+}
+},400);
+
+setTimeout(()=>clearInterval(intervalo),6000);
+}
+
+</script>
+
+</body>
+</html>
